@@ -29,8 +29,8 @@ class UserController extends Controller
         ]);
         $data = RegisterUserRequest::validate($request);
         $service = new RegisterUserService($data);
-
-        if( !$product = $service->run() ) {
+        $user = $service->run();
+        if( !$user ) {
             return redirect()->back()->with('danger', 'Not possible create this User! Try again.');
         } else {
             return redirect()->back()->with('success', 'User created with success!');
